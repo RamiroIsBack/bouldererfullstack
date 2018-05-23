@@ -1,0 +1,58 @@
+{
+  "boulderers": [
+    {
+      "id": "1",
+      "name": "Movil",
+      "email": "fgarmaestro@gmail.com",
+      "age": 36,
+      "areaId": "1"
+    },
+    {
+      "id": "4",
+      "name": "Tom Jones",
+      "email": "Tom@gmail.com",
+      "age": 55,
+      "areaId": "2"
+    },
+    {
+      "id": "5",
+      "name": "Raul",
+      "email": "raul@gmail.com",
+      "age": 30,
+      "areaId": "1"
+    },
+    {
+      "name": "alber",
+      "email": "sanfesa.alberto@hotmail.com",
+      "age": 35,
+      "id": "g6VsLJI",
+      "areaId": "3"
+    },
+    {
+      "name": "Javi",
+      "email": "javi@gmail.com",
+      "age": 37,
+      "id": "7o7uV4K"
+    }
+  ],
+  "areas": [
+    {
+      "id": "1",
+      "name": "bolonia",
+      "style": "overhanging",
+      "location": "south"
+    },
+    {
+      "id": "2",
+      "name": "pedriza",
+      "style": "slab",
+      "location": "center"
+    },
+    {
+      "id": "3",
+      "name": "rozas",
+      "style": "arete",
+      "location": "north"
+    }
+  ]
+}
