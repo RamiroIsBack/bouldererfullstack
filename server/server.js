@@ -1,12 +1,12 @@
-const express = require('express');
 const models = require('./models');
-const expressGraphQL = require('express-graphql');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportConfig = require('./services/auth');
 const MongoStore = require('connect-mongo')(session);
 const schema = require('./schema/schema');
+const express = require('express');
+const expressGraphQL = require('express-graphql');
 
 // Create a new Express application
 const app = express();

@@ -3,11 +3,20 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Every user has an email and password.  The password is not stored as
+// Every user has an email and password ADDED A NAME TOO.  The password is not stored as
 // plain text - see the authentication helpers below.
 const UserSchema = new Schema({
   email: String,
-  password: String
+  password: String,
+  nombre:String,
+  areas: [{
+    type: Schema.Types.ObjectId,
+    ref: 'area'
+  }],
+  problems: [{
+    type: Schema.Types.ObjectId,
+    ref: 'problem'
+  }]
 });
 
 // The user's password is never saved in plain text.  Prior to saving the
