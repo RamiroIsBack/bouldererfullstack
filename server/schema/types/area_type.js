@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const graphql = require('graphql');
-const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList , GraphQLFloat} = graphql;
+const { GraphQLObjectType, GraphQLString ,
+  GraphQLID, GraphQLList , GraphQLFloat} = graphql;
 const ProblemType = require('./problem_type');
 const UserType = require('./user_type');
+const PhotoType = require('./photo_type');
 const Area = mongoose.model('area');
 const User = mongoose.model ('user');
 
@@ -21,7 +23,12 @@ const AreaType = new GraphQLObjectType({
     latitude: { type: GraphQLFloat },
     longitude: { type: GraphQLFloat },
     nombre: { type: GraphQLString },
-    photos:{ type: new GraphQLList(GraphQLString)},
+    photos:{ 
+      type: new GraphQLList(PhotoType),
+      resolve(parentValue,args){
+        return Area.findPhotos(parentValue.id);
+        
+      }},
     comments:{ type: new GraphQLList(GraphQLString)},
     problems: {
       type: new GraphQLList(ProblemType),

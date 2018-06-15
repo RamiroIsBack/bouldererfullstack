@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 const models = require('./models');
 const mongoose = require('mongoose');
 const session = require('express-session');
@@ -45,6 +46,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(bodyParser.json({limit: '30mb'}));
 // Instruct Express to pass on any request made to the '/graphql' route
 // to the GraphQL instance.
 app.use('/graphql', expressGraphQL({
