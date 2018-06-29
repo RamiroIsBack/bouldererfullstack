@@ -28,7 +28,8 @@ const AreaType = new GraphQLObjectType({
       resolve(parentValue,args){
         return Area.findPhotos(parentValue.id);
         
-      }},
+      }
+    },
     comments:{ type: new GraphQLList(GraphQLString)},
     problems: {
       type: new GraphQLList(ProblemType),

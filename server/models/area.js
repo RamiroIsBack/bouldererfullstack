@@ -25,15 +25,28 @@ const AreaSchema = new Schema({
 
 
 AreaSchema.statics.addProblem = 
-function(nombre,photos,content , areaId ,  userId, description, latitude,longitude) {
+function(nombre,img,line,content , areaId ,  userId, description, latitude,longitude) {
   const Problem = mongoose.model('problem');
-
+  const Photo = mongoose.model('photo');
   return this.findById(areaId)
     .then(area => {
-      const problem = new Problem({nombre ,photos, content,  area, userId, description, latitude,longitude})
-      area.problems.push(problem)
-      return Promise.all([problem.save(), area.save()])
-        .then(([problem, area]) => area);
+      return Promise.all([
+        new Photo({nombre:nombre+Date.now(),date:Date.now(),userId}).save(),
+        new Problem({nombre , content, area, userId, description, latitude,longitude}).save()
+      ]).then(([photo,problem])=>{
+        console.log (problem.id);
+          photo.problemId = problem.id;
+          problem.photos.push(photo);
+          area.problems.push(problem);
+          photo.img = img;
+          photo.line = line;
+          return Promise.all([problem.save(), area.save(), photo.save()])
+            .then(([problem,area,photo])=>{
+              
+              return area;
+            });
+    
+        });
     });
 }
 AreaSchema.statics.addArea = 
@@ -42,23 +55,9 @@ function(userId, nombre ,img ,description , comments, latitude, longitude){
   const Photo = mongoose.model('photo');
   const User = mongoose.model('user');
   const Area = mongoose.model('area');
-  // fs.writeFileSync('/imgs/uploadedImage.jpg',photos[0],'base64', err =>{
-  //   console.log('error al guardar la foto'+err);
-  //   return err;
-  // });//it's sincronous so it'll only do d following if it's succes
-  // photo.data = fs.readFileSync('/imgs/uploadedImage.jpg','base64',err =>{
-  //   console.log('error al leer la foto' +err )
-  //   return err;
-  // })
-    
-    
-    // const buffer = new Buffer.from(photo, 'base64');
-    // photoModel.img.data= buffer;
-    // photoModel.img.contentType = 'image/jpg';
-    
-    
+   
     return User.findById(userId).then(user=>{
-      console.log (user)
+      
       return Promise.all([
         new Photo({nombre:nombre+Date.now(),date:Date.now(),userId: userId}).save(), 
         new Area({ nombre,description ,user,comments, latitude, longitude }).save()])

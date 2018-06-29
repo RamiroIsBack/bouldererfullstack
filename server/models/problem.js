@@ -10,15 +10,16 @@ const ProblemSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'user'
   },
+  photos:[{
+    type: Schema.Types.ObjectId,
+    ref: 'photo'
+  }],
   likes: { type: Number, default: 0 },
   description: { type: String },
   latitude: { type: Number },
   longitude: { type: Number },
   nombre: {type:String},
   comments:[{type:String}],
-  photos:[{
-    type:String
-  }]
 });
 
 ProblemSchema.statics.like = function(id) {
@@ -29,6 +30,11 @@ ProblemSchema.statics.like = function(id) {
       ++problem.likes;
       return problem.save();
     })
+}
+ProblemSchema.statics.findPhotos = function(id) {
+  return this.findById(id)
+    .populate('photos')
+    .then(problem => problem.photos);
 }
 
 mongoose.model('problem', ProblemSchema);

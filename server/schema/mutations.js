@@ -60,13 +60,9 @@ const mutation = new GraphQLObjectType ({
         comments:{ type: new GraphQLList(GraphQLString)},
       },
       resolve(parentValue, { userId, nombre,img,description, comments, latitude, longitude }) {
-        //en el area del models hacer que mongoose guarde la foto
-        // y meter toda este resolve tb ahi d paso
-               
+       
         return Area.addArea(userId, nombre,img,description , comments, latitude, longitude )
-        // return User.findById(userId).then(user=>{
-        // return (new Area({ nombre,photos,description ,user, comments, latitude, longitude })).save()
-        // });
+       
       }
     },
     addProblemToArea: {
@@ -76,13 +72,14 @@ const mutation = new GraphQLObjectType ({
         latitude: { type: GraphQLFloat },
         longitude: { type: GraphQLFloat },
         nombre: { type: GraphQLString },
-        photos:{ type: new GraphQLList(GraphQLString)},
+        img:{ type:GraphQLString},
+        line:{ type:GraphQLString},
         comments:{ type: new GraphQLList(GraphQLString)},
         areaId: { type: GraphQLID },
         userId: { type: GraphQLID },
       },
-      resolve(parentValue, { nombre,photos, description, areaId, userId, comments, latitude, longitude }) {
-        return Area.addProblem(nombre,photos,description , areaId ,  userId, comments, latitude, longitude);
+      resolve(parentValue, { nombre,img,line, description, areaId, userId, comments, latitude, longitude }) {
+        return Area.addProblem(nombre,img,line,description , areaId ,  userId, comments, latitude, longitude);
       }
     },
     likeProblem: {

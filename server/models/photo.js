@@ -5,6 +5,7 @@ const PhotoSchema = new Schema({
   nombre: { type: String },
   date:{type: String},
   img: { type: String },
+  line: { type: String }, //optional, only for problems
 
   userId: {
     type: Schema.Types.ObjectId,

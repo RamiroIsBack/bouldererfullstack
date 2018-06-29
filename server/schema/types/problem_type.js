@@ -10,7 +10,7 @@ const {
 } = graphql;
 const Problem = mongoose.model('problem');
 const User = mongoose.model ('user');
-
+const PhotoType = require('./photo_type');
 // const PhotoType = new GraphQLObjectType({
 //   name:'phototype',
 //   fields:() =>({
@@ -29,8 +29,14 @@ const ProblemType = new GraphQLObjectType({
     latitude: { type: GraphQLFloat },
     longitude: { type: GraphQLFloat },
     nombre: { type: GraphQLString },
-    photos:{ type: new GraphQLList(GraphQLString)},
     comments:{ type: new GraphQLList(GraphQLString)},
+    photos:{ 
+      type: new GraphQLList(PhotoType),
+      resolve(parentValue,args){
+        return Problem.findPhotos(parentValue.id);
+        
+      }
+    },
     user: {
       type: require('./user_type'),
       resolve(parentValue, args){
