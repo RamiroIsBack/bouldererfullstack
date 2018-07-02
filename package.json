@@ -37,7 +37,7 @@
     "react-apollo": "^2.1.4",
     "react-dom": "^16.4.0",
     "react-router-dom": "^4.3.1",
-    "webpack": "^2.2.0",
+    "webpack": "^2.7.0",
     "webpack-dev-middleware": "^1.9.0"
   }
 }
